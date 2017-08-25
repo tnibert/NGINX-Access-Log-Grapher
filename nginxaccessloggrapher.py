@@ -21,10 +21,10 @@ from matplotlib import dates
 
 IVAL=5                                                  # interval in minutes
 ROLL=5                                                  # how many intervals to roll
-IPSPLIT=False                                            # show graphs for individual IPs
+IPSPLIT=True                                            # show graphs for individual IPs
 TOTALTRAFFIC=True                                       # show graph for total traffic (all IPs)
-IPVIEW=[]               # fill this list with the ips you want to check, if empty we will show all IPs
-FILENAME='access.log'
+IPVIEW=['127.0.0.1']               # fill this list with the ips you want to check, if empty we will show all IPs
+FILENAME='example.log'
 # graph types enabled:
 GRAPHNORMAL=True
 GRAPHROLLED=True
@@ -188,7 +188,7 @@ if __name__ == '__main__':
 
     # return tuple of times and ips
     timesandips = process_log(log_file)
-    print len(timesandips)
+    #print len(timesandips)
 
     if len(IPVIEW) == 0:
         ips = [x[0] for x in timesandips]
@@ -204,12 +204,12 @@ if __name__ == '__main__':
     # create graphs of total traffic
     if(TOTALTRAFFIC):
         times = [x[1] for x in timesandips]
-        print len(times)
+        #print len(times)
         gd = generate_graph_dict(times)
         # display time intervals and number present
-        for k,v in gd.items():
-            if(True):
-                print str(k) + " " + str(v)
+        #for k,v in gd.items():
+        #    if(True):
+        #        print str(k) + " " + str(v)
                 #pass
         ivalstr = "On interval " + str(IVAL) + " minutes for full system"
         if(GRAPHNORMAL): graph(gd, ivalstr)
@@ -222,9 +222,9 @@ if __name__ == '__main__':
             times = [x[1] for x in timesandips if x[0] == ip]
 
             gd = generate_graph_dict(times)
-            for k,v in gd.items():
-                if(v > 0):
-                    print str(k) + " " + str(v)
+            #for k,v in gd.items():
+            #    if(v > 0):
+            #        print str(k) + " " + str(v)
                     #pass
             ivalstr = "On interval " + str(IVAL) + " minutes for " + ip
             if(GRAPHNORMAL): graph(gd, ivalstr)
